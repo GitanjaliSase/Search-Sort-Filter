@@ -6,6 +6,10 @@ export default function App(){
   const [searchText, setSearchText]=useState("");
   const [filterUsers,setFilterUsers]=useState(USERS);
    useEffect(()=>{
+    if(!searchText){
+      setFilterUsers(USERS);
+      return;
+    }
     const tempFilteredUsers=USERS.filter((user)=>{
       if(user.name.toLocaleLowerCase().includes(searchText)){
         return true;
@@ -18,7 +22,8 @@ export default function App(){
       }else{
         return false;
       }
-    })
+    });
+    setFilterUsers(tempFilteredUsers);
    },[searchText]);
 
     return(
